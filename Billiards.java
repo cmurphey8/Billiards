@@ -8,6 +8,8 @@
  *  PART 1: Complete methods init() & draw() to get up and running
  *  PART 2: Complete methods pocket() and shift() to upgrade our billiards sim
  * 
+ *  EXTRA PRACTICE: Make sure your program recognizes when all balls have been pocketed!
+ * 
  *  NOTE: It's okay for now to assume that the billiards balls do not interact with one another!
  * 
  *************************************************************************/
@@ -58,15 +60,7 @@ public class Billiards {
         double vx0 = 0.015, vy0 = 0.023;
         int image0 = 4;
 
-        for (int i = 0; i < N; i++) {
-            rx[i] = rx0 + Math.abs(rx0) * i;
-            ry[i] = ry0 + Math.abs(ry0) * i;
-        
-            vx[i] = vx0;
-            vy[i] = vy0;
-            
-            image[i] = (image0 + 2 * i) + "Ball.png";
-        }
+        // TODO
     }
 
     public static void step() {   
@@ -87,16 +81,9 @@ public class Billiards {
         draw();
     }
 
-    
-
     // draw the billiards table with all remaining balls
     public static void draw() {
-        table();
-        for (int i = 0; i < N; i++) {
-            StdDraw.picture(rx[i], ry[i], image[i]);
-        }
-        StdDraw.show();
-        StdDraw.pause(10); 
+        // TODO
     }
 
     // draw table with necessary params
@@ -107,16 +94,7 @@ public class Billiards {
     // play runOut(k) simulation if ball would be near enough to a pocket after update
     // NOTE: don't forget about the side pockets!
     public static boolean pocket(int k) {
-        if (Math.abs(rx[k] + vx[k]) > X_EDGE - TOL) {
-            if (Math.abs(ry[k] + vy[k]) > Y_EDGE - TOL) {
-                runOut(k);
-                return true;
-            }
-            if (Math.abs(ry[k] + vy[k]) < TOL ) {
-                runOut(k);
-                return true;
-            }  
-        }
+        // TODO
         return false;
     }
 
@@ -132,13 +110,6 @@ public class Billiards {
     // reduce global variable N by 1
     // shift all elements after k left by 1
     public static void shift(int k) {
-        N--;
-        for (int i = k; i < N; i++) {
-            vx[i] = vx[i+1];
-            vy[i] = vy[i+1];
-            rx[i] = rx[i+1];
-            ry[i] = ry[i+1];
-            image[i] = image[i+1];
-        }
+        // TODO
     }
 } 
