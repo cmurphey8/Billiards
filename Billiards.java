@@ -1,6 +1,4 @@
 /*************************************************************************
- *  Compilation:  javac Billiards.java
- *  Execution:    java Billiards
  *  Dependencies: StdDraw.java StdAudio.java
  *                laser.wav pop.wav
  *                BilliardsTable.png 4Ball.png 6Ball.png 8Ball.png
