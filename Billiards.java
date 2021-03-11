@@ -45,10 +45,8 @@ public class Billiards {
 
     public static void step() {
         for (int i = 0; i < N; i++) {
-            // TO DO: do not break until all 3 balls have been pocketed
             if (pocket(i)) { continue; }
-
-            // TO DO: Upgrade simulation to run all balls that have not been pocketed
+            
             if (Math.abs(rx[i] + vx[i]) > .75) { vx[i] = -vx[i]; StdAudio.play("pop.wav"); }
             if (Math.abs(ry[i] + vy[i]) > 1.7) { vy[i] = -vy[i]; StdAudio.play("pop.wav"); }
 
