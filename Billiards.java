@@ -3,7 +3,7 @@
  *  Execution:    java Billiards
  *  Dependencies: StdDraw.java StdAudio.java
  *                laser.wav pop.wav
- *                fourBall.png sixBall.png eightBall.png
+ *                4Ball.png 6Ball.png 8Ball.png
  *
  *  GOAL: Upgrade this simulation to run 3 balls at once 
  *  NOTE: It's okay for now to assume that the images do not interact with one another!
