@@ -4,9 +4,8 @@
  *  Dependencies: StdDraw.java StdAudio.java
  *                laser.wav pop.wav
  *                BilliardsTable.png 4Ball.png 6Ball.png 8Ball.png
- *
- *  GOAL: Upgrade this simulation to run 3 balls at once 
- *  NOTE: It's okay for now to assume that the images do not interact with one another!
+ * 
+ *  NOTE: It's okay for now to assume that the billiards balls do not interact with one another!
  * 
  *************************************************************************/
 
@@ -18,7 +17,7 @@ public class Billiards {
     public static double[] vx;          // x velocity (m/s)
     public static double[] vy;          // y velocity (m/s)
     public static String[] image;       // name of each ball, including file type
-    public static int N = 3;
+    public static int N = 3;            // number of billiards balls in play
 
     public static void main(String[] args) {    
         // declare size of global arrays
@@ -45,14 +44,19 @@ public class Billiards {
 
     public static void step() {
         for (int i = 0; i < N; i++) {
+            // skip turnaround if ball is pocketed
             if (pocket(i)) { continue; }
-            
+
+            // turnaround if ball would pass boundary
             if (Math.abs(rx[i] + vx[i]) > .75) { vx[i] = -vx[i]; StdAudio.play("pop.wav"); }
             if (Math.abs(ry[i] + vy[i]) > 1.7) { vy[i] = -vy[i]; StdAudio.play("pop.wav"); }
 
+            // move the ball forward one time-step
             rx[i] = rx[i] + vx[i]; 
             ry[i] = ry[i] + vy[i]; 
         }
+        
+        // use global arrays to draw a new frame
         draw();
     }
 
@@ -60,18 +64,14 @@ public class Billiards {
     // set ry components to -1, 0, 1
     // set all vx, vy components to .015, .023 
     public static void init() {
-        double rx0 = 0.4, ry0 = 1;
+        // some helpful constants -> can you init with a loop? 
+        double rx0 = -0.4, ry0 = -1;
         double vx0 = 0.015, vy0 = 0.023;
         int image0 = 4;
 
-        rx[0] = -rx0;
-        ry[0] = -ry0;
-        vx[0] = vx0;
-        vy[0] = vy0; 
-        image[0] = image0 + "Ball.png"; 
-        for (int i = 1; i < N; i++) {
-            rx[i] = rx[i-1] + rx0;
-            ry[i] = ry[i-1] + ry0;
+        for (int i = 0; i < N; i++) {
+            rx[i] = rx0 + Math.abs(rx0) * i;
+            ry[i] = ry0 + Math.abs(ry0) * i;
         
             vx[i] = vx0;
             vy[i] = vy0;
@@ -82,12 +82,17 @@ public class Billiards {
 
     // draw the billiards table with all remaining balls
     public static void draw() {
-        StdDraw.picture(0, 0, "billiardsTable.png", 2, 4);
+        table();
         for (int i = 0; i < N; i++) {
             StdDraw.picture(rx[i], ry[i], image[i]);
         }
         StdDraw.show();
         StdDraw.pause(10); 
+    }
+
+    // draw table with necessary params
+    public static void table() {
+        StdDraw.picture(0, 0, "billiardsTable.png", 2, 4);
     }
 
     // play runout() simulation if ball is near enough to a pocket
@@ -107,11 +112,12 @@ public class Billiards {
 
     // simulate a ball exiting
     public static void runOut(int k) {
-        rx[k] = rx[k] + vx[k]; 
-        ry[k] = ry[k] + vy[k];
+        // shift this ball forward 2 steps (turnaround is skipped in step() method)
+        rx[k] = rx[k] + 2 * vx[k]; 
+        ry[k] = ry[k] + 2 * vy[k];
         StdAudio.play("laser.wav");
 
-        // drop this ball from further iterations
+        // remove this ball from further iterations
         shift(k);
 
         return;
