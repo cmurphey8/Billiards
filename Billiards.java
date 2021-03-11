@@ -6,8 +6,6 @@
  *  PART 1: Complete methods init() & draw() to get up and running
  *  PART 2: Complete methods pocket() and shift() to upgrade our billiards sim
  * 
- *  EXTRA PRACTICE: Make sure your program recognizes when all balls have been pocketed!
- * 
  *  NOTE: It's okay for now to assume that the billiards balls do not interact with one another!
  * 
  *************************************************************************/
