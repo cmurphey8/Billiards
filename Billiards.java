@@ -4,7 +4,7 @@
  *                BilliardsTable.png 4Ball.png 6Ball.png 8Ball.png
  * 
  *  PART 1: Complete methods init() & draw() to get up and running
- *  PART 2: Complete methods pocket() and shift() to upgrade our billiards sim
+ *  PART 2: Complete methods pocket() & shift() to upgrade our billiards sim
  * 
  *  NOTE: It's okay for now to assume that the billiards balls do not interact with one another!
  * 
