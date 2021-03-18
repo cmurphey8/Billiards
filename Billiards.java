@@ -51,7 +51,7 @@ public class Billiards {
     // set ry components to -1, 0, 1
     // set all vx, vy components to .015, .023 
     public static void init() {
-        // some helpful constants -> can you init with a loop? 
+        // some helpful constants (you can delete them if you don't use them!) -> can you init with a loop? 
         double rx0 = -0.4, ry0 = -1;
         double vx0 = 0.015, vy0 = 0.023;
         int image0 = 4;
