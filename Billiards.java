@@ -1,10 +1,12 @@
 /*************************************************************************
+ *  Compilation:  javac Billiards.java
+ *  Execution:    java Billiards
  *  Dependencies: StdDraw.java StdAudio.java
  *                laser.wav pop.wav
  *                BilliardsTable.png 4Ball.png 6Ball.png 8Ball.png
  * 
  *  PART 1: Complete methods init() & draw() to get up and running
- *  PART 2: Complete methods pocket() & shift() to upgrade our billiards sim
+ *  PART 2: Complete methods pocket() and shift() to upgrade our billiards sim
  * 
  *  NOTE: It's okay for now to assume that the billiards balls do not interact with one another!
  * 
@@ -23,6 +25,8 @@ public class Billiards {
     public static double X_EDGE = 0.75;     // walls and pockets x boundary
     public static double Y_EDGE = 1.7;      // walls and pockets y boundary
     public static double TOL = 0.05;        // tolerance from boundary to pocket a ball
+
+    public static double dt = 0.1;          // time quantum (s)
 
     public static void main(String[] args) {    
         // declare size of global arrays
@@ -49,11 +53,11 @@ public class Billiards {
 
     // set rx components to -.4, 0, .4
     // set ry components to -1, 0, 1
-    // set all vx, vy components to .015, .023 
+    // set all vx, vy components to .15, .23 
     public static void init() {
-        // some helpful constants (you can delete them if you don't use them!) -> can you init with a loop? 
+        // some helpful constants -> can you init with a loop? 
         double rx0 = -0.4, ry0 = -1;
-        double vx0 = 0.015, vy0 = 0.023;
+        double vx0 = 0.15, vy0 = 0.23;
         int image0 = 4;
 
         // TODO
@@ -64,13 +68,13 @@ public class Billiards {
             // skip turnaround if ball is pocketed
             if (pocket(i)) { continue; }
 
-            // turnaround if ball would pass a boundary
-            if (Math.abs(rx[i] + vx[i]) > X_EDGE) { vx[i] = -vx[i]; StdAudio.play("pop.wav"); }
-            if (Math.abs(ry[i] + vy[i]) > Y_EDGE) { vy[i] = -vy[i]; StdAudio.play("pop.wav"); }
+            // turnaround if ball would passes a boundary
+            if (Math.abs(rx[i] + vx[i] * dt) > X_EDGE) { vx[i] = -vx[i]; StdAudio.play("pop.wav"); }
+            if (Math.abs(ry[i] + vy[i] * dt) > Y_EDGE) { vy[i] = -vy[i]; StdAudio.play("pop.wav"); }
 
             // move the ball forward one time-step
-            rx[i] = rx[i] + vx[i]; 
-            ry[i] = ry[i] + vy[i]; 
+            rx[i] = rx[i] + vx[i] * dt; 
+            ry[i] = ry[i] + vy[i] * dt; 
         }
         
         // use global arrays to draw a new frame
@@ -90,7 +94,6 @@ public class Billiards {
     // play runOut(k) simulation if ball would be near enough to a pocket after update
     // NOTE: don't forget about the side pockets!
     public static boolean pocket(int k) {
-        // NOTE: see global constants X_EDGE, Y_EDGE, TOL
         // TODO
         return false;
     }
@@ -105,7 +108,7 @@ public class Billiards {
     }
 
     // reduce global variable N by 1
-    // shift all elements after k in all global arrays left by 1 
+    // shift all elements after k left by 1
     public static void shift(int k) {
         // TODO
     }
