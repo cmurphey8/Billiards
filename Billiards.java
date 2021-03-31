@@ -26,7 +26,7 @@ public class Billiards {
     public static double Y_EDGE = 1.7;      // walls and pockets y boundary
     public static double TOL = 0.05;        // tolerance from boundary to pocket a ball
 
-    public static double dt = 0.1;          // time quantum (s)
+    public static double dt = 0.1;          // time-quantum (s)
 
     public static void main(String[] args) {    
         // declare size of global arrays
