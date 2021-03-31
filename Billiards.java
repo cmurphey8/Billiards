@@ -95,7 +95,7 @@ public class Billiards {
     // NOTE: don't forget about the side pockets!
     public static boolean pocket(int k) {
         // TODO
-        return false;   // auto-return false for PART 1; return true after runOut sim in TODO for PART 2
+        return false;   // auto-return false for PART 1; return true after runOut for PART 2
     }
 
     // simulate a ball exiting
